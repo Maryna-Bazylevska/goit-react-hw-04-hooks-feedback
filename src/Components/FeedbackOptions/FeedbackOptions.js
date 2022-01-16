@@ -1,9 +1,20 @@
 import css from "./FeedbackOptions.module.css";
+import PropTypes from "prop-types";
 function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
     <>
       <div className={css.list}>
-        <button
+        {options.map((item) => (
+          <button
+            key={item}
+            className={css.button}
+            type="button"
+            onClick={() => onLeaveFeedback(item)}
+          >
+            {item}
+          </button>
+        ))}
+        {/* <button
           className={css.button}
           type="button"
           name={options[0]}
@@ -26,9 +37,13 @@ function FeedbackOptions({ options, onLeaveFeedback }) {
           onClick={() => onLeaveFeedback(`${options[2]}`)}
         >
           Bad
-        </button>
+        </button> */}
       </div>
     </>
   );
 }
+FeedbackOptions.propTypes = {
+  onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string),
+};
 export default FeedbackOptions;
